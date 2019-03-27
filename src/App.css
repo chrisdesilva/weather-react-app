@@ -1,5 +1,8 @@
 .report {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+  font-size: 1.2rem;
 }
 
 .weatherDisplay {
@@ -12,4 +15,9 @@
   background-repeat: no-repeat;
   height: 100vh;
   margin: 1rem;
+}
+
+#weatherIcon {
+  display: flex;
+  justify-content: center;
 }

@@ -4,8 +4,8 @@ import '../App.css'
 
 const WeatherDisplay = props => (
   <div>
-    <h1 style={{textAlign: "center", paddingTop: "12rem"}}>Weather Report</h1>
-    <Grid divided stackable columns={2} style={{marginTop: "2.5rem"}}>
+    <h1 style={{textAlign: "center", paddingTop: "12rem"}}>WeatheReport</h1>
+    <Grid divided stackable columns={2} style={{marginTop: "4rem"}}>
       <Grid.Column className="column">
         <Form error onSubmit={props.getWeather} >
           <Form.Field>
@@ -27,7 +27,7 @@ const WeatherDisplay = props => (
           {props.temp && <p>Temperature: {props.temp}°F</p>}
           {props.humidity && <p>Humidity: {props.humidity}%</p>}
           {props.conditions && <p>Conditions: {props.conditions}</p>}
-          {props.icon && <Image src={`http://openweathermap.org/img/w/${props.icon}.png`} alt="Weather details icon"/>}
+          {props.icon && <div id="weatherIcon"><Image src={`http://openweathermap.org/img/w/${props.icon}.png`} alt="Weather details icon"/></div>}
         </Grid.Column>
       }
     </Grid>
