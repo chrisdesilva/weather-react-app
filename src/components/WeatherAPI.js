@@ -8,8 +8,10 @@ class Weather extends Component {
         isLoaded: false,
         error: undefined,
         temp: undefined,
+        humidity: undefined,
         name: undefined,
         zipCode: undefined,
+        icon: undefined,
         conditions: undefined
     }
   }
@@ -17,14 +19,16 @@ class Weather extends Component {
   getWeather = async (e) => {
     e.preventDefault();
     const zipCode = e.target.elements.zipCode.value;
-    const api = await fetch(`https://api.openweathermap.org/data/2.5/forecast?zip=${zipCode},us&units=imperial&appid=3e511299402293065a188769c2d4e072`)
+    const api = await fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&units=imperial&appid=3e511299402293065a188769c2d4e072`)
     const response = await api.json()
     try
     {
       this.setState({
-        temp: response.list[0].main.temp.toFixed(0),
-        name: response.city.name,
-        conditions: response.list[0].weather[0].description,
+        temp: response.main.temp.toFixed(0),
+        humidity: response.main.humidity,
+        name: response.name,
+        conditions: response.weather[0].description,
+        icon: response.weather[0].icon,
         error: undefined,
         zipCode
       })
@@ -42,7 +46,9 @@ class Weather extends Component {
         zipCode={this.state.zipCode}
         name={this.state.name}
         temp={this.state.temp}
+        humidity={this.state.humidity}
         conditions={this.state.conditions}
+        icon={this.state.icon}
         error={this.state.error}
       />
     )

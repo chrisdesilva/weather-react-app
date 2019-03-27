@@ -1,28 +1,37 @@
 import React from 'react';
-import { Button, Form, Grid } from 'semantic-ui-react';
+import { Button, Form, Grid, Image, Message } from 'semantic-ui-react';
+import '../App.css'
 
 const WeatherDisplay = props => (
-  <Grid divided>
-    <Grid.Row centered columns={2}>
-      <Grid.Column>
-        <Form onSubmit={props.getWeather}>
+  <div>
+    <h1 style={{textAlign: "center", marginTop: "2.5rem"}}>Weather Report</h1>
+    <Grid divided stackable columns={2} style={{marginTop: "2.5rem"}}>
+      <Grid.Column className="column">
+        <Form error onSubmit={props.getWeather} >
           <Form.Field>
             <label>Zip Code</label>
-            <input type ="text" name="zipCode" placeholder="Enter your zip code"/>
+            <Form.Input type ="text" name="zipCode" placeholder="Enter your zip code"/>
           </Form.Field>
-          <Button type="submit">Get Weather</Button>
+          <Button primary type="submit">Get Weather</Button>
+          {props.error &&
+            <Message 
+              error
+              header="Invalid Zip Code"
+              content="Please enter a valid zip code"
+            />
+          }
         </Form>
       </Grid.Column>
-      <Grid.Column>
-        {props.zipCode && <h1>Weather around {props.name} </h1>}
+      <Grid.Column className="column">
+        {props.zipCode && <p>Weather in the <strong>{props.name}</strong> area</p>}
         {props.temp && <p>Temperature: {props.temp}°F</p>}
+        {props.humidity && <p>Humidity: {props.humidity}%</p>}
         {props.conditions && <p>Conditions: {props.conditions}</p>}
+        {props.icon && <Image src={`http://openweathermap.org/img/w/${props.icon}.png`} alt="Weather details icon"/>}
       </Grid.Column>
-    </Grid.Row>
-    <Grid.Row>
-      {props.error && <p>{props.error}</p>}
-    </Grid.Row>
-  </Grid>
+    </Grid>
+  </div>
+
 ) 
 
 export default WeatherDisplay;
